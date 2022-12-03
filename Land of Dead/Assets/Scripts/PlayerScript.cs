@@ -12,15 +12,35 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Player Animator and Gravity")]
     public CharacterController cC;
+    public float gravity = -9.81f;
+    
 
     [Header("Player Jumping and Velocity")]
     public float turnCalmTime = 0.1f;
     float turnCalmVelocity; 
-    
+    public float jumpRange = 6f;
+    Vector3 velocity;
+    public Transform surfaceCheck;
+    bool onSurface;
+    public float surfaceDistance = 0.4f;
+    public LayerMask surfaceMask;
+
 
     private void Update() 
     {
+
+        onSurface = Physics.CheckSphere(surfaceCheck.position, surfaceDistance, surfaceMask);
+
+        if(onSurface && velocity.y < 0){
+            velocity.y = -2f;
+
+        }
+
+        velocity.y += gravity + Time.deltaTime;
+        cC.Move(velocity * Time.deltaTime);
+
         playerMove();
+        Jump();
     }
 
     void playerMove()
@@ -32,12 +52,18 @@ public class PlayerScript : MonoBehaviour
 
         if(direction.magnitude >= 0.1f)
         {
-            float targetValue = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnCalmVelocity, turnCalmTime);)
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnCalmVelocity, turnCalmTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             cC.Move(moveDirection.normalized * playerSpeed * Time.deltaTime);
+        }
+    }
+
+    void Jump(){
+        if(Input.GetButtonDown("Jump") && onSurface){
+            velocity.y = Mathf.Sqrt(jumpRange * -22 * gravity);
         }
     }
 }
