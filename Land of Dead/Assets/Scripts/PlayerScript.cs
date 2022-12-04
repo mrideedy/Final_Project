@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
     [Header("Player Jumping and Velocity")]
     public float turnCalmTime = 0.1f;
     float turnCalmVelocity; 
-    public float jumpRange = 6f;
+    public float jumpRange = 1f;
     Vector3 velocity;
     public Transform surfaceCheck;
     bool onSurface;
@@ -36,7 +36,7 @@ public class PlayerScript : MonoBehaviour
 
         }
 
-        velocity.y += gravity + Time.deltaTime;
+        velocity.y += gravity * Time.deltaTime;
         cC.Move(velocity * Time.deltaTime);
 
         playerMove();
@@ -63,7 +63,7 @@ public class PlayerScript : MonoBehaviour
 
     void Jump(){
         if(Input.GetButtonDown("Jump") && onSurface){
-            velocity.y = Mathf.Sqrt(jumpRange * -22 * gravity);
+            velocity.y = Mathf.Sqrt(jumpRange * -2 * gravity);
         }
     }
 }
