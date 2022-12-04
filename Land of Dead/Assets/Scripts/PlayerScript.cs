@@ -49,19 +49,21 @@ public class PlayerScript : MonoBehaviour
 
     void playerMove()
     {
-        animator.SetBool("Idle", false);
-        animator.SetBool("Walk", true);
-        animator.SetBool("Running", false);
-        animator.SetBool("IdleAim", false);
-
-
         float horizontal_axis = Input.GetAxisRaw("Horizontal");
         float vertical_axis = Input.GetAxisRaw("Vertical");
 
         Vector3 direction = new Vector3(horizontal_axis, 0f, vertical_axis).normalized;
 
         if(direction.magnitude >= 0.1f)
-        {
+        {   
+
+            animator.SetBool("Idle", false);
+            animator.SetBool("Walk", true);
+            animator.SetBool("Running", false);
+            animator.SetBool("RifleWalk", false);
+            animator.SetBool("IdleAim", false);
+            
+
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnCalmVelocity, turnCalmTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
