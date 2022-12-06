@@ -10,6 +10,8 @@ public class Rifle : MonoBehaviour
     public float shootingRange = 80f;
     public float fireCharge = 15f;
     private float nextTimeToShoot = 0f;
+    public Animator animator; 
+
     public PlayerScript player;
     public Transform hand;
 
@@ -42,8 +44,31 @@ public class Rifle : MonoBehaviour
 
         if(Input.GetButton("Fire1") && Time.time >= nextTimeToShoot)
         {
+            animator.SetBool("Fire", true);
+            animator.SetBool("Idle", false);
+
             nextTimeToShoot = Time.time + 1f/fireCharge;
             Shoot();
+        }
+        else if(Input.GetButton("Fire1") && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
+
+            animator.SetBool("FireWalk", true);
+            animator.SetBool("Idle", false);
+
+        }
+        else if(Input.GetButton("Fire2") && Input.GetButton("Fire1")){
+
+            animator.SetBool("Idle", false);
+            animator.SetBool("IdleAim", true);
+            animator.SetBool("Walk", true);
+            animator.SetBool("FireWalk", true);
+            animator.SetBool("Reloading", false);
+
+        }
+        else{
+            animator.SetBool("Fire", false);
+            animator.SetBool("Idle", true);
+            animator.SetBool("FireWalk", false);
         }
     }
 
@@ -85,9 +110,11 @@ public class Rifle : MonoBehaviour
         setReloading = true;
         Debug.Log("Reloading...");
         //play animation
+        animator.SetBool("Reloading", true);
         //play reload sound
         yield return new WaitForSeconds(reloadingTime);
         //play animation
+        animator.SetBool("Reloading", false);
         presentAmmunition = maximumAmmunition;
         player.playerSpeed = 1.9f;
         player.playerSprint = 3;
