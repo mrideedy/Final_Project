@@ -11,7 +11,7 @@ public class Rifle : MonoBehaviour
     public float fireCharge = 15f;
     private float nextTimeToShoot = 0f;
     public PlayerScript player;
-
+    public Transform hand;
 
     [Header("Rifle Ammunition and shooting")]
     private int maximumAmmunition = 32;
@@ -25,6 +25,7 @@ public class Rifle : MonoBehaviour
     public GameObject WoodedEffect;
 
     private void Awake(){
+        transform.SetParent(hand);
         presentAmmunition = maximumAmmunition;
 
     }
