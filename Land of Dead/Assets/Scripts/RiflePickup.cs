@@ -19,7 +19,7 @@ public class RiflePickup : MonoBehaviour
 
     private void Update()
     {
-        if(Vector3.Distance(transform.position, player.transform.position) < radius)
+        if(Vector3.Distance(PickupRifle.transform.position, player.transform.position) <= radius)
         {
             if(Input.GetKeyDown("f"))
             {
