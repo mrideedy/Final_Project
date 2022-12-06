@@ -8,14 +8,18 @@ public class Rifle : MonoBehaviour
     public Camera cam;
     public float giveDamageOf = 8.8f;
     public float shootingRange = 80f;
+    public float fireCharge = 15f;
+    private float nextTimeToShoot = 0f;
+
 
     [Header("Rifle Effects")]
     public ParticleSystem muzzleSpark;
     public GameObject WoodedEffect;
 
     private void Update() {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButton("Fire1") && Time.time >= nextTimeToShoot)
         {
+            nextTimeToShoot = Time.time + 1f/fireCharge;
             Shoot();
         }
     }
