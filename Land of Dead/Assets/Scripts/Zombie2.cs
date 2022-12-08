@@ -53,22 +53,17 @@ public class Zombie2 : MonoBehaviour
     private void Idle()
     {
         zombieAgent.SetDestination(transform.position);
+        anim.SetBool("Idle", true);
+        anim.SetBool("Running", false);
     }
 
     private void Pursueplayer(){
 
         if(zombieAgent.SetDestination(playerBody.position)){
             //animations
-            //anim.SetBool("Walking", false);
-            //anim.SetBool("Running", true);
-            //anim.SetBool("Attacking", false);
-            //anim.SetBool("Died", false);
-        }
-        else{
-            //anim.SetBool("Walking", false);
-            //anim.SetBool("Running", false);
-            //anim.SetBool("Attacking", false);
-            //anim.SetBool("Died", true);
+            anim.SetBool("Idle", false);
+            anim.SetBool("Running", true);
+            anim.SetBool("Attacking", false);
         }
 
     }
@@ -86,10 +81,11 @@ public class Zombie2 : MonoBehaviour
                 {
                     playerBody.playerHitDamage(giveDamage);
                 }
-                //anim.SetBool("Walking", false);
-                //anim.SetBool("Running", false);
-                //anim.SetBool("Attacking", true);
-                //anim.SetBool("Died", false);
+        
+                anim.SetBool("Attacking", true);
+                anim.SetBool("Running", false);
+                
+                
             }
             previouslyAttack = true;
             Invoke(nameof(ActiveAttacking), timeBtwAttack);
@@ -104,10 +100,8 @@ public class Zombie2 : MonoBehaviour
 
         presentHealth -= takeDamage;
         if(presentHealth <= 0){
-            //anim.SetBool("Walking", false);
-            //anim.SetBool("Running", false);
-            //anim.SetBool("Attacking", false);
-            //anim.SetBool("Died", true);
+    
+            anim.SetBool("Died", true);
 
             zombieDie();
         }
