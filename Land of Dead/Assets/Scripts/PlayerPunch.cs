@@ -21,6 +21,7 @@ public class PlayerPunch : MonoBehaviour
 
             ObjectToHit objectToHit = hitInfo.transform.GetComponent<ObjectToHit>();
             Zombie1 zombie1 = hitInfo.transform.GetComponent<Zombie1>();
+            Zombie2 zombie2 = hitInfo.transform.GetComponent<Zombie2>();
 
             if(objectToHit != null){
                 objectToHit.ObjectHitDamage(giveDamageOf);
@@ -29,6 +30,10 @@ public class PlayerPunch : MonoBehaviour
             else if(zombie1 != null){
                 zombie1.zombieHitDamage(giveDamageOf);
                 
+            }
+            else if(zombie2 != null)
+            {
+                zombie2.zombieHitDamage(giveDamageOf);
             }
         }
     }
