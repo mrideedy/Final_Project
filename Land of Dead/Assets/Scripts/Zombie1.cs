@@ -7,6 +7,8 @@ using UnityEngine.AI;
 public class Zombie1 : MonoBehaviour
 {
     [Header("Zombie Health and Damage")]
+    private float zombieHealth = 100f;
+    private float presentHealth;
     public float giveDamage = 5f;
     
     [Header("Zombie Things")]
@@ -22,9 +24,12 @@ public class Zombie1 : MonoBehaviour
     public float zombieSpeed;
     float walkingpointRadius = 2;
 
-    [Header("Zombie mood/states")]
+    [Header("Zombie Attacking Var")]
     public float timeBtwAttack;
     bool previouslyAttack;
+
+    [Header("Zombie Animation")]
+    public Animator anim;
 
 
     [Header("Zombie mood/states")]
@@ -35,6 +40,7 @@ public class Zombie1 : MonoBehaviour
 
     private void Awake()
     {
+        presentHealth = zombieHealth;
         zombieAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -64,7 +70,20 @@ public class Zombie1 : MonoBehaviour
     }
 
     private void Pursueplayer(){
-        zombieAgent.SetDestination(playerBody.position);
+
+        if(zombieAgent.SetDestination(playerBody.position)){
+            //animations
+            anim.SetBool("Walking", false);
+            anim.SetBool("Running", true);
+            anim.SetBool("Attacking", false);
+            anim.SetBool("Died", false);
+        }
+        else{
+            anim.SetBool("Walking", false);
+            anim.SetBool("Running", false);
+            anim.SetBool("Attacking", false);
+            anim.SetBool("Died", true);
+        }
 
     }
     private void AttackPlayer(){
@@ -81,6 +100,10 @@ public class Zombie1 : MonoBehaviour
                 {
                     playerBody.playerHitDamage(giveDamage);
                 }
+                anim.SetBool("Walking", false);
+                anim.SetBool("Running", false);
+                anim.SetBool("Attacking", true);
+                anim.SetBool("Died", false);
             }
             previouslyAttack = true;
             Invoke(nameof(ActiveAttacking), timeBtwAttack);
@@ -90,4 +113,29 @@ public class Zombie1 : MonoBehaviour
         previouslyAttack = false;
         
     }
+
+    public void zombieHitDamage(float takeDamage){
+
+        presentHealth -= takeDamage;
+        if(presentHealth <= 0){
+            anim.SetBool("Walking", false);
+            anim.SetBool("Running", false);
+            anim.SetBool("Attacking", false);
+            anim.SetBool("Died", true);
+
+            zombieDie();
+        }
+
+    }
+
+    private void zombieDie(){
+        zombieAgent.SetDestination(transform.position);
+        zombieSpeed = 0f;
+        attackingRadius = 0f;
+        visionRadius = 0f;
+        playerInvisionRadius = false;
+        playerInattackingRadius = false;
+        Object.Destroy(gameObject,5.0f);
+    }
+
 }
