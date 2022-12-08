@@ -43,6 +43,7 @@ public class RiflePickup : MonoBehaviour
             {
                 PlayerRifle.SetActive(true);
                 PickupRifle.SetActive(false);
+                animator.SetBool("Punch", false);
                 //sound
 
                 //objective completed

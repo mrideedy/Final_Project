@@ -30,6 +30,7 @@ public class Rifle : MonoBehaviour
     private void Awake(){
         transform.SetParent(hand);
         presentAmmunition = maximumAmmunition;
+        animator.SetBool("Punch", false);
 
     }
 
@@ -70,6 +71,7 @@ public class Rifle : MonoBehaviour
             animator.SetBool("Fire", false);
             animator.SetBool("Idle", true);
             animator.SetBool("FireWalk", false);
+            animator.SetBool("Punch", false);
         }
     }
 
