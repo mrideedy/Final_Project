@@ -9,21 +9,22 @@ public class PlayerScript : MonoBehaviour
     public float playerSprint = 3f;
 
     [Header("Player Health Things")]
-    private float playerHealth = 100f;
+    private float playerHealth = 120f;
     public float presentHealth;
+    public GameObject playerDamage;
 
     [Header("Player Script Cameras")]
-    public Transform playerCamera; 
+    public Transform playerCamera;
 
     [Header("Player Animator and Gravity")]
     public CharacterController cC;
     public float gravity = -9.81f;
     public Animator animator;
-    
+
 
     [Header("Player Jumping and Velocity")]
     public float turnCalmTime = 0.1f;
-    float turnCalmVelocity; 
+    float turnCalmVelocity;
     public float jumpRange = 1f;
     Vector3 velocity;
     public Transform surfaceCheck;
@@ -31,17 +32,19 @@ public class PlayerScript : MonoBehaviour
     public float surfaceDistance = 0.4f;
     public LayerMask surfaceMask;
 
-    private void Start(){
+    private void Start()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         presentHealth = playerHealth;
     }
 
-    private void Update() 
+    private void Update()
     {
 
         onSurface = Physics.CheckSphere(surfaceCheck.position, surfaceDistance, surfaceMask);
 
-        if(onSurface && velocity.y < 0){
+        if (onSurface && velocity.y < 0)
+        {
             velocity.y = -2f;
 
         }
@@ -51,7 +54,7 @@ public class PlayerScript : MonoBehaviour
 
         playerMove();
         Jump();
-        
+
         Sprint();
     }
 
@@ -62,15 +65,15 @@ public class PlayerScript : MonoBehaviour
 
         Vector3 direction = new Vector3(horizontal_axis, 0f, vertical_axis).normalized;
 
-        if(direction.magnitude >= 0.1f)
-        {   
+        if (direction.magnitude >= 0.1f)
+        {
 
             animator.SetBool("Idle", false);
             animator.SetBool("Walk", true);
             animator.SetBool("Running", false);
             animator.SetBool("RifleWalk", false);
             animator.SetBool("IdleAim", false);
-            
+
 
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnCalmVelocity, turnCalmTime);
@@ -87,14 +90,15 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void Jump(){
-        if(Input.GetButtonDown("Jump") && onSurface)
+    void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && onSurface)
         {
             animator.SetBool("Idle", false);
             animator.SetTrigger("Jump");
             velocity.y = Mathf.Sqrt(jumpRange * -2 * gravity);
         }
-        else 
+        else
         {
             animator.SetBool("Idle", true);
             animator.ResetTrigger("Jump");
@@ -103,14 +107,14 @@ public class PlayerScript : MonoBehaviour
 
     void Sprint()
     {
-        if(Input.GetButton("Sprint") && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) && onSurface)
+        if (Input.GetButton("Sprint") && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) && onSurface)
         {
             float horizontal_axis = Input.GetAxisRaw("Horizontal");
             float vertical_axis = Input.GetAxisRaw("Vertical");
 
             Vector3 direction = new Vector3(horizontal_axis, 0f, vertical_axis).normalized;
 
-            if(direction.magnitude >= 0.1f)
+            if (direction.magnitude >= 0.1f)
             {
 
                 animator.SetBool("Walk", false);
@@ -135,7 +139,9 @@ public class PlayerScript : MonoBehaviour
     {
         presentHealth -= takeDamage;
 
-        if(presentHealth <= 0)
+        StartCoroutine(PlayerDamage());
+
+        if (presentHealth <= 0)
         {
             PlayerDie();
         }
@@ -145,5 +151,13 @@ public class PlayerScript : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Object.Destroy(gameObject, 1.0f);
+    }
+
+    IEnumerator PlayerDamage()
+    {
+        playerDamage.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        playerDamage.SetActive(false);
+
     }
 }
