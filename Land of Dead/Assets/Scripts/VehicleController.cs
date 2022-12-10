@@ -29,11 +29,57 @@ public class VehicleController : MonoBehaviour
     public float wheelsTorque = 20f;
     private float presentTurnAngle = 0f;
 
+    [Header("Vehicle Security")]
+    public PlayerScript player;
+    private float radius = 5f;
+    private bool isOpened = false;
+
+    [Header("Disable Things")]
+    public GameObject AimCam;
+    public GameObject AimCanvas;
+    public GameObject ThirdPersonCam;
+    public GameObject ThirdPersonCanvas;
+    public GameObject PlayerCharacter;
+
 
     private void Update()
     {
-        MoveVehicle();
-        VehicleSteering();
+        if(Vector3.Distance(transform.position, player.transform.position) < radius)
+        {
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                isOpened = true;
+                radius = 5000f;
+                // objective complete
+            }
+            else if(Input.GetKeyDown(KeyCode.G))
+            {
+                player.transform.position = vehicleDoor.transform.position;
+                isOpened = false;
+                radius = 5f;
+            }
+        }
+
+        if(isOpened == true)
+        {
+            ThirdPersonCam.SetActive(false);
+            ThirdPersonCanvas.SetActive(false);
+            AimCam.SetActive(false);
+            AimCanvas.SetActive(false);
+            PlayerCharacter.SetActive(false);
+
+            MoveVehicle();
+            VehicleSteering();
+            ApplyBreaks();
+        }
+        else if(isOpened == false)
+        {
+            ThirdPersonCam.SetActive(true);
+            ThirdPersonCanvas.SetActive(true);
+            AimCam.SetActive(true);
+            AimCanvas.SetActive(true);
+            PlayerCharacter.SetActive(true);
+        }
     }
 
 
@@ -70,5 +116,18 @@ public class VehicleController : MonoBehaviour
 
         WT.position = position;
         WT.rotation = rotation;
+    }
+
+    void ApplyBreaks()
+    {
+        if(Input.GetKey(KeyCode.Space))
+            presentBreakForce = breakingForce;
+        else
+            presentBreakForce = 0f;
+        frontRightWheelCollider.brakeTorque = presentBreakForce;
+        frontLeftWheelCollider.brakeTorque = presentBreakForce;
+        backRightWheelCollider.brakeTorque = presentBreakForce;
+        backLeftWheelCollider.brakeTorque = presentBreakForce;
+
     }
 }
