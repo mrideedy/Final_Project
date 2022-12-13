@@ -150,4 +150,13 @@ public class PlayerScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Object.Destroy(gameObject, 1.0f);
     }
+
+    /*removed as a 'comment' after 49th commit is done
+    IEnumerator PlayerDamage()
+    {
+        playerDamage.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        playerDamage.SetActive(false);
+    }
+    */
 }
