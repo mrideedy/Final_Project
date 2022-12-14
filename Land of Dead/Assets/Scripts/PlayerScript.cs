@@ -11,9 +11,11 @@ public class PlayerScript : MonoBehaviour
     [Header("Player Health Things")]
     private float playerHealth = 100f;
     public float presentHealth;
+    public HealthBar healthBar;
 
     [Header("Player Script Cameras")]
     public Transform playerCamera; 
+    public GameObject EndGameMenuUI;
 
     [Header("Player Animator and Gravity")]
     public CharacterController cC;
@@ -34,6 +36,7 @@ public class PlayerScript : MonoBehaviour
     private void Start(){
         Cursor.lockState = CursorLockMode.Locked;
         presentHealth = playerHealth;
+        healthBar.GiveFullHealth(playerHealth);
     }
 
     private void Update() 
@@ -135,6 +138,8 @@ public class PlayerScript : MonoBehaviour
     {
         presentHealth -= takeDamage;
 
+        healthBar.SetHealth(presentHealth);
+
         if(presentHealth <= 0)
         {
             PlayerDie();
@@ -143,7 +148,17 @@ public class PlayerScript : MonoBehaviour
 
     private void PlayerDie()
     {
+        EndGameMenuUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Object.Destroy(gameObject, 1.0f);
     }
+
+    /*removed as a 'comment' after 49th commit is done
+    IEnumerator PlayerDamage()
+    {
+        playerDamage.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        playerDamage.SetActive(false);
+    }
+    */
 }
