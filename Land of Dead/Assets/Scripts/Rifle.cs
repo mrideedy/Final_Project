@@ -11,9 +11,9 @@ public class Rifle : MonoBehaviour
     public float fireCharge = 15f;
     private float nextTimeToShoot = 0f;
     public Animator animator; 
-
     public PlayerScript player;
     public Transform hand;
+    public GameObject rifleUI;
 
     [Header("Rifle Ammunition and shooting")]
     private int maximumAmmunition = 32;
@@ -29,6 +29,7 @@ public class Rifle : MonoBehaviour
 
     private void Awake(){
         transform.SetParent(hand);
+        rifleUI.SetActive(true);
         presentAmmunition = maximumAmmunition;
         animator.SetBool("Punch", false);
 
@@ -90,6 +91,8 @@ public class Rifle : MonoBehaviour
         }
 
         //Updating the UI
+        AmmoCount.occurrence.UpdateAmmoText(presentAmmunition);
+        AmmoCount.occurrence.UpdateMagText(mag);
 
         muzzleSpark.Play();
         RaycastHit hitInfo;
