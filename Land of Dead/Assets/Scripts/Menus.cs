@@ -68,12 +68,12 @@ public class Menus : MonoBehaviour
 
     public void Restart()
     {
-        //restart
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void LoadMenu()
     {
-        //load menu
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
