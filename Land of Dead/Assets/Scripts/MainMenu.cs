@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class mainmenu : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
     public GameObject SelectCharacter;
-    public GameObject mainmenu;
+    public GameObject mainMenu;
 
 
     public void OnSelectCharacter()
     {
         SelectCharacter.SetActive(true);
-        mainmenu.SetActive(false);
+        mainMenu.SetActive(false);
     }
 
     public void OnPlayButton()
     {
-        Scene.LoadScene("LandOfDead");
+        SceneManager.LoadScene("LandOfTheDead");
     }
 
     public void OnQuitButton()
