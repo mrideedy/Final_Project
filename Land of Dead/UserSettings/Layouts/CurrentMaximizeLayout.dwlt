@@ -224,9 +224,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 1cfbffff
+      m_SelectedIDs: 9a680100
+      m_LastClickedID: 92314
+      m_ExpandedIDs: 1cfbffff506c0000cc83000018d0000080b10100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -488,7 +488,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Particles
@@ -504,9 +504,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 388.55298, y: 21.40887, z: 633.15234}
+    m_Target: {x: 286.32117, y: 9.391216, z: 586.96686}
     speed: 2
-    m_Value: {x: 388.55298, y: 21.40887, z: 633.15234}
+    m_Value: {x: 286.32117, y: 9.391216, z: 586.96686}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -553,13 +553,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.10107257, y: 0.8680967, z: -0.19759731, w: 0.4440259}
+    m_Target: {x: -0.028233316, y: 0.58442074, z: -0.020349754, w: -0.8107109}
     speed: 2
-    m_Value: {x: 0.10107257, y: 0.86809677, z: -0.19759731, w: 0.4440259}
+    m_Value: {x: -0.028233316, y: 0.58442074, z: -0.020349754, w: -0.8107109}
   m_Size:
-    m_Target: 4.456277
+    m_Target: 34.786247
     speed: 2
-    m_Value: 4.456277
+    m_Value: 34.786247
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -778,23 +778,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 47
   m_LastFolders:
-  - Assets
+  - Assets/Prefabs
   m_LastFoldersGridSize: 47
   m_LastProjectPath: C:\Users\ASUS\OneDrive\Documents\GitHub\Final_Project\Land of
     Dead
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: d8d60100
-    m_LastClickedID: 120536
-    m_ExpandedIDs: 00000000d8d6010000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 200.5037}
+    m_SelectedIDs: e6d80100
+    m_LastClickedID: 121062
+    m_ExpandedIDs: 00000000dad6010006da01000ada01000cda010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -822,7 +822,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d8d60100
+    m_ExpandedIDs: 00000000dad6010006da01000ada01000cda010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -847,8 +847,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 9a680100
+    m_LastClickedInstanceID: 92314
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300003ec10100ec2700003a39030000000000
     m_RenameOverlay:
@@ -866,7 +866,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 14}
+      m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
