@@ -49,8 +49,8 @@ public class RiflePickup : MonoBehaviour
                 //sound
 
                 //objective completed
+                ObjectivesComplete.occurence.GetObjectivesDone(true, false, false, false);
             }
         }
     }
 }
- 
