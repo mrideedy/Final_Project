@@ -27,6 +27,9 @@ public class Rifle : MonoBehaviour
     public GameObject WoodedEffect;
     public GameObject goreEffect;
 
+    [Header("Sounds and UI")]
+    public GameObject AmmoOutUI;
+
     private void Awake(){
         transform.SetParent(hand);
         rifleUI.SetActive(true);
@@ -81,6 +84,7 @@ public class Rifle : MonoBehaviour
         //check for mag
         if(mag==0){
             //show ammo out text
+            StartCoroutine(showAmmoOut());
             return;
         }
         
@@ -140,6 +144,11 @@ public class Rifle : MonoBehaviour
         setReloading = false;
     }
 
-
+    IEnumerator showAmmoOut()
+    {
+        AmmoOutUI.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        AmmoOutUI.SetActive(false);
+    }
 
 }
