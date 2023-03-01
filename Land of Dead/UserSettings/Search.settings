@@ -10,6 +10,9 @@ scopes = {
 	"last_search.10697386" = "postprocessing"
 	"OpenInspectorPreview.10697386" = "0"
 	"currentGroup.10697386" = "all"
+	"last_search.DA949528" = "dire"
+	"OpenInspectorPreview.DA949528" = "0"
+	"currentGroup.DA949528" = "all"
 }
 providers = {
 	adb = {
@@ -56,6 +59,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"d"
 ]
 searchItemFavorites = [
 ]
