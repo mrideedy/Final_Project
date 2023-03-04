@@ -37,16 +37,16 @@ public class Rifle : MonoBehaviour
         transform.SetParent(hand);
         rifleUI.SetActive(true);
         presentAmmunition = maximumAmmunition;
-     // animator.SetBool("Punch", false);
-       
+     // animator.SetBool("Punch", false);      
     }
 
-    private void Update() {
+    private void Update() 
+    {
         if(setReloading){
             return;
         }
 
-        if(presentAmmunition==0){
+        if(presentAmmunition <=0){
             StartCoroutine(Reload());
             return;
         }
@@ -55,14 +55,13 @@ public class Rifle : MonoBehaviour
         {
             animator.SetBool("Fire", true);
             animator.SetBool("Idle", false);
-
             nextTimeToShoot = Time.time + 1f/fireCharge;
             Shoot();
         }
         else if(Input.GetButton("Fire1") && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
 
-            animator.SetBool("FireWalk", true);
             animator.SetBool("Idle", false);
+            animator.SetBool("Firewalk", true);
 
         }
         else if(Input.GetButton("Fire2") && Input.GetButton("Fire1")){
@@ -78,7 +77,7 @@ public class Rifle : MonoBehaviour
             animator.SetBool("Fire", false);
             animator.SetBool("Idle", true);
             animator.SetBool("FireWalk", false);
-            animator.SetBool("Punch", false);
+        //    animator.SetBool("Punch", false);
         }
     }
 
