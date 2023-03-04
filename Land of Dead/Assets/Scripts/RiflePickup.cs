@@ -13,7 +13,7 @@ public class RiflePickup : MonoBehaviour
     [Header("Rifle Assign Things")]
     public PlayerScript player;
     private float radius = 2.5f;
-    public Animator animator; 
+    public Animator animator;
     private float nextTimeToPunch = 0f;
     public float punchCharge = 15f;
 
@@ -28,20 +28,22 @@ public class RiflePickup : MonoBehaviour
     private void Update()
     {
 
-        if(Input.GetButtonDown("Fire1") && Time.time >= nextTimeToPunch){
+        if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToPunch)
+        {
             animator.SetBool("Punch", true);
             animator.SetBool("Idle", false);
-            nextTimeToPunch = Time.time + 1f/punchCharge;
+            nextTimeToPunch = Time.time + 1f / punchCharge;
             playerPunch.Punch();
         }
-        else{
+        else
+        {
             animator.SetBool("Punch", false);
-            animator.SetBool("Idle", true);            
+            animator.SetBool("Idle", true);
         }
 
-        if(Vector3.Distance(PickupRifle.transform.position, player.transform.position) <= radius)
+        if (Vector3.Distance(PickupRifle.transform.position, player.transform.position) <= radius)
         {
-            if(Input.GetKeyDown("f"))
+            if (Input.GetKeyDown("f"))
             {
                 PlayerRifle.SetActive(true);
                 PickupRifle.SetActive(false);
@@ -49,7 +51,7 @@ public class RiflePickup : MonoBehaviour
                 //sound
 
                 //objective completed
-                ObjectivesComplete.occurence.GetObjectivesDone(true, false, false, false);
+                ObjectivesComplete.occurrence.ObjectiveOne(true);
             }
         }
     }

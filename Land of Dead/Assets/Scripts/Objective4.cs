@@ -7,10 +7,10 @@ public class Objective4 : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Vehicle")
+        if (other.gameObject.tag == "Vehicle")
         {
             //complete objective
-            ObjectivesComplete.occurence.GetObjectivesDone(true, true, true, true);
+            ObjectivesComplete.occurrence.ObjectiveFour(true);
 
             SceneManager.LoadScene("MainMenu");
         }

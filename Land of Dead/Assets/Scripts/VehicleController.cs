@@ -51,16 +51,16 @@ public class VehicleController : MonoBehaviour
 
     private void Update()
     {
-        if(Vector3.Distance(vehicleDoor.transform.position, player.transform.position) < radius)
+        if (Vector3.Distance(vehicleDoor.transform.position, player.transform.position) < radius)
         {
-            if(Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 isOpened = true;
                 radius = 5000f;
                 // objective complete
-                ObjectivesComplete.occurence.GetObjectivesDone(true, true, true, false);
+                ObjectivesComplete.occurrence.ObjectiveTwo(true);
             }
-            else if(Input.GetKeyDown(KeyCode.G))
+            else if (Input.GetKeyDown(KeyCode.G))
             {
                 player.transform.position = vehicleDoor.transform.position;
                 isOpened = false;
@@ -68,7 +68,7 @@ public class VehicleController : MonoBehaviour
             }
         }
 
-        if(isOpened == true)
+        if (isOpened == true)
         {
             ThirdPersonCam.SetActive(false);
             ThirdPersonCanvas.SetActive(false);
@@ -81,7 +81,7 @@ public class VehicleController : MonoBehaviour
             ApplyBreaks();
             HitZombies();
         }
-        else if(isOpened == false)
+        else if (isOpened == false)
         {
             ThirdPersonCam.SetActive(true);
             ThirdPersonCanvas.SetActive(true);
@@ -129,7 +129,7 @@ public class VehicleController : MonoBehaviour
 
     void ApplyBreaks()
     {
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
             presentBreakForce = breakingForce;
         else
             presentBreakForce = 0f;
@@ -142,10 +142,10 @@ public class VehicleController : MonoBehaviour
 
     void HitZombies()
     {
-        
+
         RaycastHit hitInfo;
 
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, hitRange))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, hitRange))
         {
             Debug.Log(hitInfo.transform.name);
 
@@ -154,20 +154,22 @@ public class VehicleController : MonoBehaviour
             ObjectToHit objectToHit = hitInfo.transform.GetComponent<ObjectToHit>();
 
 
-            if(zombie1 != null){
+            if (zombie1 != null)
+            {
                 zombie1.zombieHitDamage(giveDamageOf);
                 zombie1.GetComponent<CapsuleCollider>().enabled = false;
                 GameObject goreEffectGo = Instantiate(goreEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                 Destroy(goreEffectGo, 1f);
             }
-            else if(zombie2 != null)
+            else if (zombie2 != null)
             {
                 zombie2.zombieHitDamage(giveDamageOf);
                 zombie2.GetComponent<CapsuleCollider>().enabled = false;
                 GameObject goreEffectGo = Instantiate(goreEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                 Destroy(goreEffectGo, 1f);
             }
-            else if(objectToHit != null){
+            else if (objectToHit != null)
+            {
                 objectToHit.ObjectHitDamage(giveDamageOf);
                 GameObject WoodGo = Instantiate(DestroyEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                 Destroy(WoodGo, 1f);
