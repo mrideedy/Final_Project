@@ -71,4 +71,5 @@ public class ObjectivesComplete : MonoBehaviour
             objective4.color = Color.white;
         }
     }
+}
 
