@@ -32,7 +32,7 @@ The primary goal of Land of the Dead is to deliver a highly interactive and enga
 
 ## Screenshots
 
-![Screenshot 1](Screenshots/screenshot1.png)
+![Screenshot 1](Land of Dead/Assets/Flooded_Grounds/Scenes/ss1.png)
 ![Screenshot 2](Screenshots/screenshot2.png)
 
 
